@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="demo.hello.plaync.webapp.repository.mssqlsample.MssqlSampleMapper">
+ 
+    <select id="getPersonInfo" resultType="demo.hello.plaync.webapp.beans.SampleDomain">
+        SELECT ID_PERSON		as idPerson
+        	 , NM_PERSON		as nmPerson
+        	 , DT_BIRTH			as dtBirth
+        	 , CD_GENDER		as cdGender
+        	 , NO_PHONE_1		as noPhone1
+        	 , NO_PHONE_2		as noPhone2
+        	 , NO_PHONE_3		as noPhone3
+        	 , DS_ADDR			as dsAddr
+        	 , DS_ADDR_DTL		as dsAddrDtl
+        	 , DS_COMMENT		as dsComment
+          FROM testDB.dbo.TEST_PERSON
+         WHERE ID_PERSON = #{idPerson}
+    </select>
+     
+</mapper>

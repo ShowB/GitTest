@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_FILE" value="./logs/catalina.out" />
+	<property name="HC_LOG_FILE" value="./logs/httpclient.log" />
+	<property name="MAX_HISTORY" value="10" />
+	<property name="MAX_FILESIZE" value="100MB" />
+	<include resource="com/ncsoft/aframework/boot/starter/logging/logback/base.xml" />
+
+	<logger name="demo.hello.plaync.webapp" level="DEBUG" />
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>

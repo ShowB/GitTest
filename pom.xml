@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>demo-plaync</groupId>
+	<artifactId>hello-plaync</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<parent>
+		<groupId>com.ncsoft.aframework.boot</groupId>
+		<artifactId>aframework-boot-starter-parent</artifactId>
+		<version>1.1.6-RELEASE</version>
+	</parent>
+
+	<properties>
+		<build.utc.timestamp>${maven.build.timestamp}</build.utc.timestamp>
+		<build.number>LOCAL_BUILD</build.number>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.ncsoft.aframework.boot</groupId>
+		    <artifactId>aframework-boot-starter-logging-access</artifactId>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>com.ncsoft.aframework.boot</groupId>
+		    <artifactId>aframework-boot-starter-plaync-thymeleaf</artifactId>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>com.ncsoft.aframework.boot</groupId>
+		    <artifactId>aframework-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.ncsoft.aframework.boot</groupId>
+		    <artifactId>aframework-boot-starter-sqljdbc4</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.ncsoft.aframework.boot</groupId>
+		    <artifactId>aframework-boot-starter-mybatis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>releases</id>
+			<name>libs-release</name>
+			<url>http://repo.ncsoft.net/artifactory/libs-release</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>shapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://repo.ncsoft.net/artifactory/libs-snapshot</url>
+			<snapshots />
+		</repository>
+	</repositories>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

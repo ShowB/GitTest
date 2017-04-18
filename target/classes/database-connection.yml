@@ -1,0 +1,7 @@
+database:
+  connections:
+    MSSQL_SAMPLE:
+      url: jdbc:sqlserver://SHOWB-PC\SQLEXPRESS;databaseName=master
+      max-pool-size: 20
+      username: sa
+      password: 1234
