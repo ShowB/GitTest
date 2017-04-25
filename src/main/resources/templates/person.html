@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="type" content="Websites:article"/>
+    <meta property="og:site_name" content="plaync" />
+    <meta property="og:title" content="Hello Plaync"/>
+    <title>Person CRUD 테스트</title>
+</head>
+<body>
+<div>
+    <div align="center" style="margin-top:50px;">
+    	<h2>회원목록</h2>
+		<table border="1" id="content" style="width:80%;">
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>생년월일</th>
+				<th>전화번호</th>
+				<th>집주소</th>
+				<th>인삿말</th>
+			</tr>
+		
+			<tr th:each="person: ${list}">
+				<td><a href="javascript:;" th:onclick="'javascript:fnDetail(\'' + ${person.idPerson} + '\')'" th:text="${person.idPerson}">아이디</a></td>
+				<td><a th:text="${person.nmPerson}">이름</a></td>
+				<td><a th:text="${person.dtBirth}">생년월일</a></td>
+				<td><a th:if="${person.noPhone1} != null AND ${person.noPhone2} != null AND ${person.noPhone3} != null AND ${person.noPhone1} != '' AND ${person.noPhone2} != '' AND ${person.noPhone3} != ''" th:text="${person.noPhone1} + '-' + ${person.noPhone2} + '-' + ${person.noPhone3}">전화번호</a></td>
+				<td><a th:text="${person.dsAddr} + '' + ${person.dsAddrDtl}">집주소</a></td>
+				<td><a th:text="${person.dsComment}">인삿말</a></td>
+			</tr>
+		</table>
+    </div>
+    <div style="margin-left:10%; margin-top:50px;">
+		<table>
+			<tr>
+				<th align="left">아이디</th>
+				<td><input type="text" id="idPerson"/></td>
+			</tr>
+			<tr>
+				<th align="left">이름</th>
+				<td><input type="text" id="nmPerson"/></td>
+			</tr>
+			<tr>
+				<th align="left">생년월일</th>
+				<td><input type="date" id="dtBirth"/></td>
+			</tr>
+			<tr>
+				<th align="left">성별</th>
+				<td><input type="radio" name="cdGender" value="M" />남<input type="radio" name="cdGender" value="F" />여</td>
+			</tr>
+			<tr>
+				<th align="left">전화번호</th>
+				<td>
+					<select id="noPhone1">
+						<option>010</option>
+						<option>011</option>
+						<option>016</option>
+						<option>017</option>
+						<option>018</option>
+						<option>019</option>
+					</select>
+					-
+					<input type="text" id="noPhone2" style="width:50px;" />
+					-
+					<input type="text" id="noPhone3" style="width:50px;" />
+				</td>
+			</tr>
+			<tr>
+				<th align="left">집주소</th>
+				<td><input type="text" id="dsAddr"/></td>
+			</tr>
+			<tr>
+				<th align="left">상세주소</th>
+				<td><input type="text" id="dsAddrDtl"/></td>
+			</tr>
+			<tr>
+				<th align="left">인삿말</th>
+				<td><textarea rows="5" cols="50" id="dsComment"></textarea> </td>
+			</tr>
+		</table>
+		
+		<button id="registBtn">등록</button>
+		<button id="updateBtn" style="margin-left:10px;">수정</button>
+		<button id="deleteBtn" style="margin-left:10px;">삭제</button>
+    </div>
+</div>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+	$(document).ready(function() {
+		$('#registBtn').click(function() {
+			if (confirm("등록하시겠습니까?")) {
+				$.ajax({
+					type	: 'POST',
+					url		: 'http://localhost:8080/test/addPerson',
+					data	: { 
+						idPerson 	: $('#idPerson').val(),
+						nmPerson 	: $('#nmPerson').val(),
+						dtBirth		: $('#dtBirth').val(),
+						cdGender	: $('input[name=cdGender]:checked').val(),
+						noPhone1	: $('#noPhone1').val(),
+						noPhone2	: $('#noPhone2').val(),
+						noPhone3	: $('#noPhone3').val(),
+						noPhone3	: $('#noPhone3').val(),
+						dsAddr		: $('#dsAddr').val(),
+						dsAddrDtl	: $('#dsAddrDtl').val(),
+						dsComment	: $('#dsComment').val() 
+					},
+					success	: function(result) {
+						alert('등록이 완료되었습니다.');
+						location.reload();
+					},
+					error : function(result) {
+						alert('에러 발생!!!');
+					}
+				});
+			}
+		});
+		
+		$('#deleteBtn').click(function() {
+			var idPerson = $('#idPerson').val();
+			
+			if (idPerson == '' || idPerson == null) {
+				alert('선택된 사용자가 없습니다!');
+				return;
+			}
+			
+			// 사용자 삭제
+			if (confirm("사용자 " + idPerson + "을(를) 삭제하시겠습니까?")) {
+				$.ajax({
+					type	: 'POST',
+					url		: 'http://localhost:8080/test/deletePerson',
+					data	: { 
+						idPerson 	: idPerson
+					},
+					success	: function(result) {
+						alert('삭제가 완료되었습니다.');
+						location.reload();
+					},
+					error : function(result) {
+						alert('에러 발생!!!');
+					}
+				});
+			}
+		});
+		
+		$('#updateBtn').click(function() {
+			var idPerson = $('#idPerson').val();
+			
+			if (idPerson == '' || idPerson == null) {
+				alert('선택된 사용자가 없습니다!');
+				return;
+			}
+		});
+		
+	});
+	
+	function fnDetail(idPerson) {
+		
+	}
+/*]]>*/
+</script>
+</body>
+</html>

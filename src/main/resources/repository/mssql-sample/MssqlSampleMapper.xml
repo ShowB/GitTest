@@ -3,19 +3,64 @@
  
 <mapper namespace="demo.hello.plaync.webapp.repository.mssqlsample.MssqlSampleMapper">
  
-    <select id="getPersonInfo" resultType="demo.hello.plaync.webapp.beans.SampleDomain">
-        SELECT ID_PERSON		as idPerson
-        	 , NM_PERSON		as nmPerson
-        	 , DT_BIRTH			as dtBirth
-        	 , CD_GENDER		as cdGender
-        	 , NO_PHONE_1		as noPhone1
-        	 , NO_PHONE_2		as noPhone2
-        	 , NO_PHONE_3		as noPhone3
-        	 , DS_ADDR			as dsAddr
-        	 , DS_ADDR_DTL		as dsAddrDtl
-        	 , DS_COMMENT		as dsComment
+    <select id="getPersonInfo" parameterType="String" resultType="demo.hello.plaync.webapp.beans.SampleDomain">
+        SELECT ID_PERSON
+        	 , NM_PERSON		
+        	 , DT_BIRTH			
+        	 , CD_GENDER		
+        	 , NO_PHONE_1		
+        	 , NO_PHONE_2		
+        	 , NO_PHONE_3		
+        	 , DS_ADDR			
+        	 , DS_ADDR_DTL		
+        	 , DS_COMMENT		
+        	 , DT_REG			
+        	 , DT_UPD			
           FROM testDB.dbo.TEST_PERSON
-         WHERE ID_PERSON = #{idPerson}
+         WHERE 1 = 1
+<if test="idPerson != '' and idPerson != null">
+           AND ID_PERSON = #{idPerson}
+</if>
+         ORDER BY DT_REG DESC
     </select>
+    
+    <insert id="insertPersonInfo" parameterType="map">
+    	<selectKey keyProperty="idPerson" resultType="String" order="BEFORE">
+    		SELECT #{person.idPerson} + '1'
+    	</selectKey>
+        INSERT INTO testDB.dbo.TEST_PERSON (
+        	   ID_PERSON
+        	 , NM_PERSON
+        	 , DT_BIRTH
+        	 , CD_GENDER
+        	 , NO_PHONE_1
+        	 , NO_PHONE_2
+        	 , NO_PHONE_3
+        	 , DS_ADDR
+        	 , DS_ADDR_DTL
+        	 , DS_COMMENT
+        	 , DT_REG
+        	 , DT_UPD
+        ) VALUES (
+        	     #{idPerson}
+        	   , #{person.nmPerson}
+        	   , CONVERT(DATE, #{person.dtBirth})
+        	   , #{person.cdGender}
+        	   , #{person.noPhone1}
+        	   , #{person.noPhone2}
+        	   , #{person.noPhone3}
+        	   , #{person.dsAddr}
+        	   , #{person.dsAddrDtl}
+        	   , #{person.dsComment}
+        	   , CURRENT_TIMESTAMP
+        	   , CURRENT_TIMESTAMP
+        )
+    </insert>
+    
+    <delete id="deletePerson" parameterType="String">
+    	DELETE testDB.dbo.TEST_PERSON
+    	 WHERE 1 = 1
+    	   AND ID_PERSON = #{idPerson}
+    </delete>
      
 </mapper>

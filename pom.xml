@@ -24,18 +24,19 @@
 		    <artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!-- Logback Dependency -->
 		<dependency>
 		    <groupId>com.ncsoft.aframework.boot</groupId>
 		    <artifactId>aframework-boot-starter-logging-access</artifactId>
 		</dependency>
 		
-		
+		<!-- Thymeleaf Dependency -->
 		<dependency>
 		    <groupId>com.ncsoft.aframework.boot</groupId>
 		    <artifactId>aframework-boot-starter-plaync-thymeleaf</artifactId>
 		</dependency>
 		
-		
+		<!-- MS-SQL JDBC Dependency -->
 		<dependency>
 		    <groupId>com.ncsoft.aframework.boot</groupId>
 		    <artifactId>aframework-boot-starter-jdbc</artifactId>
@@ -44,25 +45,20 @@
 		    <groupId>com.ncsoft.aframework.boot</groupId>
 		    <artifactId>aframework-boot-starter-sqljdbc4</artifactId>
 		</dependency>
+		
+		<!-- Mybatis Dependency -->
 		<dependency>
 		    <groupId>com.ncsoft.aframework.boot</groupId>
 		    <artifactId>aframework-boot-starter-mybatis</artifactId>
 		</dependency>
-
+        
+        <!-- Lombok Dependency -->
 		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>2.11.0</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-		</dependency>
+		
 	</dependencies>
 
 	<repositories>

@@ -30,11 +30,14 @@ public class MyBatisConfiguration {
 		public SqlSessionFactory sqlSessionFactory() throws Exception {
 			SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 			sqlSessionFactoryBean.setDataSource(dataSource);
-			sqlSessionFactoryBean
-					.setMapperLocations(new PathMatchingResourcePatternResolver()
-							.getResources("classpath:repository/mssql-sample/*Mapper.xml"));
-			sqlSessionFactoryBean
-					.setTypeHandlers(new TypeHandler<?>[] { new DateTimeTypeHandler() });
+			
+			org.apache.ibatis.session.Configuration conf = new org.apache.ibatis.session.Configuration();
+			conf.setMapUnderscoreToCamelCase(true);
+			sqlSessionFactoryBean.setConfiguration(conf);
+			
+			sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:repository/mssql-sample/*Mapper.xml"));
+			sqlSessionFactoryBean.setTypeHandlers(new TypeHandler<?>[] { new DateTimeTypeHandler() });
+			
 			return sqlSessionFactoryBean.getObject();
 		}
 
